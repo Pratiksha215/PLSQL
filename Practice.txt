@@ -1,0 +1,465 @@
+SQL> create table tempp
+  2  (
+  3  fir number(4),
+  4  sec char(15)
+  5  );
+
+Table created.
+
+SQL> ed F:\PLSQL\p1.sql
+
+1)Begin
+         insert into tempp values(1 , 'IACSD');
+End;
+/
+
+SQL> ed @F:\PLSQL\p1.sql
+PL/SQL procedure successfully completed.
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+         1 IACSD
+
+SQL> set head off
+SQL> select * from tempp;
+
+         1 IACSD
+
+SQL> set head on
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+         1 IACSD
+
+
+
+2)
+Declare
+         x number(4);
+Begin
+        x := 199;
+        insert into tempp values (x , 'IACSD');
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+       199 IACSD
+
+
+3)
+Declare
+          x number(4) := 199;
+Begin
+          insert into tempp values(x, 'IACSD');
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+       199 IACSD
+
+
+4)Declare
+          x number(4);
+Begin
+          x := &x;
+          insert into tempp values(x, 'IACSD');
+End;
+/
+
+SQL> @F:\PLSQL\p2.sql
+Enter value for x: 199
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+       199 IACSD
+
+5)Declare
+          x constant number(4) := 199;
+Begin
+          insert into tempp values(x, 'IACSD');
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+       199 IACSD
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+SQL> create table EMP
+  2  (
+  3  Ename char(15),
+  4  Sal number(5),
+  5  Job char(15),
+  6  Deptno number(5)
+  7  );
+
+Table created.
+
+SQL> select * from emp;
+
+no rows selected
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENAME                                              CHAR(15)
+ SAL                                                NUMBER(5)
+ JOB                                                CHAR(15)
+ DEPTNO                                             NUMBER(5)
+
+SQL> insert into Emp values('KING',9000,'Manager',10);
+
+1 row created.
+SQL> select * from emp;
+
+ENAME                  SAL JOB                 DEPTNO
+--------------- ---------- --------------- ----------
+KING                  9000 Manager                 10
+
+SQL> ed F:\PLSQL\p2.sql
+
+
+1)Declare
+           x number(4);
+Begin
+           select sal into x from emp
+           where ename = 'KING';
+           insert into tempp values(x, 'KING');
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+      9000 KING
+
+
+
+2)Declare
+           x number(4);
+           y char(15);
+Begin
+           select sal , job into x,y  from emp
+           where ename = 'KING';
+           insert into tempp values(x, y);
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+      9000 Manager
+
+3)Declare 
+           x emp.sal%type;
+           y emp.job%type;
+Begin
+          select sal, job into x, y from emp
+          where ename = 'KING';
+          insert into tempp values(x , y);
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+      9000 Manager
+
+
+4)Declare
+            x emp%rowtype;
+Begin
+            select * into x from emp
+            where ename ='KING';
+            insert into tempp values(x.sal , x.job);
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+      9000 Manager
+
+5)Declare
+            x emp%rowtype;
+            y emp%rowtype;
+Begin
+            select * into x from emp
+            where ename ='KING';
+            y := x;
+            insert into tempp values(x.sal , x.job);
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+      9000 Manager
+
+6)Declare
+           type pqr is record
+           (
+             a emp.sal%type,
+             b emp.job%type
+           );
+         x pqr;
+Begin
+         select sal, job into x from emp
+         where ename = 'KING';
+         insert into tempp values(x.a , x.b);
+End;
+/
+
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+      9000 Manager
+
+7)Declare
+           type abc is record
+           (
+             a emp.sal%type,
+             b emp.job%type
+           );
+          type pqr is record
+          (
+            l number(4),
+            m abc
+          );
+         x pqr;
+Begin
+         select sal, job into x.m from emp
+         where ename = 'KING';
+         insert into tempp values(x.m.a , x.m.b);
+End;
+/
+
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+      9000 Manager
+
+------------------------------------------------------------------------------------------------------------------------
+DECODE :-
+-----------
+1)Declare
+           x number(4);
+           y char(15);
+Begin
+         Select sal,
+         decode(sign(sal-5000), 1, 'High sal', -1 , 'Low sal', 'Medium sal')
+         into x, y from emp where ename = 'KING';
+         insert into tempp values(x , y);
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+      9000 High sal
+
+-------------------------------------------------------------------------------------------------------------------------
+DECISION MAKING USING IF STATEMENT :-
+------------------------------------------------
+1)Declare
+           x number(4);
+Begin
+         Select sal into x from emp where ename = 'KING';
+         if x>5000 then
+            insert into tempp values(x , 'HIGH SAL');
+        end if;
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+      9000 HIGH SAL
+
+2)Declare
+           x number(4);
+Begin
+         Select sal into x from emp where ename = 'KING';
+         if x>5000 then
+            insert into tempp values(x , 'HIGH SAL');
+        elsif
+              x<5000 then
+            insert into tempp values(x , 'LOW SAL');
+        else
+               insert into tempp values(x , 'MEDIUM SAL');
+        end if;
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+      9000 HIGH SAL
+
+-------------------------------------------------------------------------------------------------------------------------
+BOOLEAN :-
+------------
+
+Declare
+           x boolean;
+Begin
+          x := True;
+          if x then
+                      insert into tempp values(1,'Mumbai');
+          end if;
+End;
+/
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+         1 Mumbai
+
+-------------------------------------------------------------------------------------------------------------------------
+WHILE LOOP :-
+---------------
+
+Declare
+           x number(4) := 1;
+Begin
+          while x<10
+          loop
+                      insert into tempp values(x,'in while loop');
+                      x := x+1;
+          end loop;
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+         1 in while loop
+         2 in while loop
+         3 in while loop
+         4 in while loop
+         5 in while loop
+         6 in while loop
+         7 in while loop
+         8 in while loop
+         9 in while loop
+
+10 rows selected.
+
+****Nested while loop****
+Declare
+           x number(4) := 1;
+           y number(4) := 1;
+Begin
+          while x<10
+          loop
+                     while y<10
+                     loop 
+                     insert into tempp values(y,'in y loop');
+                      y := y+1;
+                     end loop;
+                      insert into tempp values(x,'in x loop');
+                      x := x+1;
+          end loop;
+End;
+/
+
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+         1 in y loop
+         2 in y loop
+         3 in y loop
+         4 in y loop
+         5 in y loop
+         6 in y loop
+         7 in y loop
+         8 in y loop
+         9 in y loop
+         1 in x loop
+         2 in x loop
+
+       FIR SEC
+---------- ---------------
+         3 in x loop
+         4 in x loop
+         5 in x loop
+         6 in x loop
+         7 in x loop
+         8 in x loop
+         9 in x loop
+----------------------------------------------------------------------------------------------------------------------
+*******NESTED While loop*************
+
+Declare
+           x number(4) := 1;
+           y number(4) := 1;
+Begin
+          while x<10
+          loop
+                     while y<x
+                     loop 
+                            insert into tempp values(y,'in y loop');
+                           y := y+1;
+                     end loop;
+                      insert into tempp values(x,'in x loop');
+                      x := x+1;
+          end loop;
+End;
+/
+SQL> select * from tempp;
+
+       FIR SEC
+---------- ---------------
+         1 in x loop
+         1 in y loop
+         2 in x loop
+         2 in y loop
+         3 in x loop
+         3 in y loop
+         4 in x loop
+         4 in y loop
+         5 in x loop
+         5 in y loop
+         6 in x loop
+
+       FIR SEC
+---------- ---------------
+         6 in y loop
+         7 in x loop
+         7 in y loop
+         8 in x loop
+         8 in y loop
+         9 in x loop
+
+17 rows selected.

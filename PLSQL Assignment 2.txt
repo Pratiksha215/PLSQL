@@ -1,0 +1,101 @@
+1. In a PL*SQL block, create a datatype by the name of addr_type. It should
+contain the following components:-
+name varchar2 (20)
+street varchar2 (30)
+city varchar2 (20)
+state varchar2 (15)
+Your block should accept the names and addresses of 4 employees in 4 different
+variables of datatype addr_type. Output the names and addresses of the 4
+employees on the screen in the form of Labels as shown below:-
+*************************************************************
+* Name:- Jack ** Name:- Scott *
+* Street:- M.G. Road ** Street:- Bhosale Marg *
+* City:- Mumbai ** City:- Chennai *
+* State:- Maharashtra ** State:- Tamil Nadu *
+*************************************************************
+*************************************************************
+* Name:- King ** Name:- Adams *
+* Street:- Lane No:-2 ** Street:- P. M. Road *
+* City:- Nagpur ** City:- Bangalore *
+* State:- Maharashtra ** State:- Karnataka *
+*************************************************************
+
+
+
+
+
+Declare
+ TYPE addr_type IS RECORD( name varchar2(20), street varchar2(30), city varchar2(20), state varchar2(50));
+                                                        temp1 addr_type;
+                                                        temp2 addr_type ;
+                                                        temp3 addr_type ;
+                                                        temp4 addr_type;
+
+BEGIN 
+temp1.name:='&name';
+temp1.street:='&street';
+temp1.city:='&city';
+temp1.state:='&state';
+temp2.name:='&name';
+temp2.street:='&street';
+temp2.city:='&city';
+temp2.state:='&state';
+temp3.name:='&name';
+temp3.street:='&street';
+temp3.city:='&city';
+temp3.state:='&state';
+temp4.name:='&name';
+temp4.street:='&street';
+temp4.city:='&city';
+temp4.state:='&state';
+
+            dbms_output.put_line('***********************');
+dbms_output.put_line(rpad('Name:- ',10,' ')||rpad(temp1.name,20,' ')||rpad('Name:- ',10,' ')||rpad(temp2.name,20, ' ')||'');
+dbms_output.put_line(rpad('Street:- ',10,' ')||rpad(temp1.street,20,' ')||rpad('Street:- ',10,' ')||rpad(temp2.street,20, ' ')||'');
+dbms_output.put_line(rpad('City:- ',10,' ')||rpad(temp1.city,20,' ')||rpad('City:- ',10,' ')||rpad(temp2.city,20, ' ')||'');
+dbms_output.put_line(rpad('State:- ',10,' ')||rpad(temp1.state,20,' ')||rpad('State:- ',10,' ')||rpad(temp2.state,20, ' ')||'');
+dbms_output.put_line('***********************');
+dbms_output.put_line(rpad('Name:- ',10,' ')||rpad(temp3.name,20,' ')||rpad('Name:- ',10,' ')||rpad(temp4.name,20, ' ')||'');
+dbms_output.put_line(rpad('Street:- ',10,' ')||rpad(temp3.street,20,' ')||rpad('Street:- ',10,' ')||rpad(temp4.street,20, ' ')||'');
+dbms_output.put_line(rpad('City:- ',10,' ')||rpad(temp3.city,20,' ')||rpad('City:- ',10,' ')||rpad(temp4.city,20, ' ')||'');
+dbms_output.put_line(rpad('State:- ',10,' ')||rpad(temp3.state,20,' ')||rpad('State:- ',10,' ')||rpad(temp4.state,20, ' ')||'');
+dbms_output.put_line('***********************');
+dbms_output.put_line('***********************');
+END;
+/
+
+
+
+
+o/p:
+SQL> @ F:\PLSQL\p3.sql
+Enter value for name: Jack
+Enter value for street: M.G. Road
+Enter value for city: Mumbai
+Enter value for state: Maharashtra
+Enter value for name: Scott
+Enter value for street: Bhosale Marg
+Enter value for city: Chennai
+Enter value for state: Tamil Nadu
+Enter value for name: King
+Enter value for street: Lane No. 2
+Enter value for city: Nagpur
+Enter value for state: Maharashtra
+Enter value for name: Adams
+Enter value for street: P.M Road
+Enter value for city: Bangalore
+Enter value for state: Karnataka
+***********************
+Name:-    Jack                Name:-    Scott
+Street:-  M.G. Road           Street:-  Bhosale Marg
+City:-    Mumbai              City:-    Chennai
+State:-   Maharashtra         State:-   Tamil Nadu
+***********************
+Name:-    King                Name:-    Adams
+Street:-  Lane No. 2          Street:-  P.M Road
+City:-    Nagpur              City:-    Bangalore
+State:-   Maharashtra         State:-   Karnataka
+***********************
+***********************
+
+PL/SQL procedure successfully completed.

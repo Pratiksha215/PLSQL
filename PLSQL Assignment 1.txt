@@ -1,0 +1,171 @@
+1. Write a program that computes the perimeter and the area of a rectangle. Define
+your own values for the length and width. (Assuming that L and W are the length
+and width of the rectangle, Perimeter = 2*(L+W) and Area = L*W. Display the
+output on the screen using dbms_output.put_line.
+
+Declare
+length number:=&length;
+width number:=&width;
+Area number;
+Perimeter number;
+Begin
+            Area:=LENGTH*width;
+            Perimeter:= 2*(LENGTH+width);
+            dbms_output.put_line('AREA OF RECTANGLE IS:'||Area);
+            dbms_output.put_line('PERIMETER OF RECTANGLE IS:'||PERIMETER);
+End;
+/
+
+o/p:
+SQL> @ F:\PLSQL\p3.sql
+Enter value for length: 4
+Enter value for width: 5
+AREA OF RECTANGLE IS:20
+PERIMETER OF RECTANGLE IS:18
+---------------------------------------------------------------------------------------------------------------------------------------------
+2)2. Write a program that declares an integer variable called num, assigns a value to it,
+and computes and inserts into the tempp table the value of the variable itself, its
+square, and its cube.
+
+Declare
+          num number:=&num;
+Begin
+        Insert into temppp
+            values(num,
+                  num*num,
+                  num*num*num);
+End;
+/
+
+O/p:
+SQL> @ F:\PLSQL\p3.sql
+Enter value for num: 4
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from temppp;
+
+      ITEM     SQUARE       CUBE
+---------- ---------- ----------
+         4         16         64
+
+---------------------------------------------------------------------------------------------------------------------------------------------3. Convert a temperature in Fahrenheit (F) to its equivalent in Celsius (C) and vice
+versa. The required formulae are:-
+C= (F-32)*5/9
+F= 9/5*C + 32
+Display the output on the screen using dbms_output.put_line. Data has to be
+input by the user.
+
+Declare
+          F number:=&Fahrenheit;
+          C number:=&Celsius;
+          Result number;
+
+ Begin
+            Result := (F-32)*5/9;
+            dbms_output.put_line('fahrenheit value entered '||F||' equal to celsius :'||' '||Result);
+
+            Result :=  9/5*C+32;
+            dbms_output.put_line('Celsius value entered '||C||' equal to fahrenheit :'||' '||Result);
+End;
+/
+
+O/p:
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for fahrenheit: 32
+Enter value for celsius: 69
+fahrenheit value entered 32 equal to celsius : 0
+Celsius value entered 69 equal to fahrenheit : 156.2
+
+PL/SQL procedure successfully completed.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+4. Convert a number of inches into yards, feet, and inches. For example, 124 inches
+equals 3 yards, 1 foot, and 4 inches. Display the output on the screen using
+dbms_output.put_line. Data has to be input by the user.
+
+Declare
+              inch int:=&howmanyinch;
+              yard int;
+              foot int;
+
+ Begin
+                 foot:=inch/12;
+                 yard:=foot / 3;
+                foot:=foot mod 3;
+                inch:=inch mod 12;
+             dbms_output.put_line(yard||' '||foot||' '||inch);
+End;
+/
+
+O/p:
+SQL> @ F:\PLSQL\p3.sql
+Enter value for howmanyinch: 124
+3 1 4
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+5. Write a program that enables a user to input an integer. The program should then
+state whether the integer is evenly divisible by 5. (Use decode instead of IF
+statement where required). Display the output on the screen using
+dbms_output.put_line. Data has to be input by the user.
+
+Declare
+                 num number(5);
+                 Result char(25);
+Begin
+            num := &num;
+            Select decode(mod(num,5), 0,  'divisible', 'not divisible') into Result
+            from dual;
+            dbms_output.put_line(Result);
+End;
+/
+
+O/p:
+SQL> @ F:\PLSQL\p3.sql
+Enter value for num: 4
+not divisible
+
+PL/SQL procedure successfully completed.
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for num: 10
+divisible
+
+PL/SQL procedure successfully completed.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+6. Your block should read in two real numbers and tell whether the product of the two numbers is equal to or greater than 100. Display the output on the screen using dbms_output.put_line. (Use decode instead of IF statement where required). Data has to be input by the user.
+
+Declare
+             a number:=&firstno;
+             b number:=&secondno;
+             Result varchar2(50);
+
+Begin
+             Select decode(trunc(a*b/100),0,'less then 100','greater then or equal to 100') 
+             into Result from dual;
+             dbms_output.put_line(RESULT);
+End;
+/
+
+
+O/p:
+SQL> @ F:\PLSQL\p3.sql
+Enter value for firstno: 50
+Enter value for secondno: 2
+greater then or equal to 100
+
+PL/SQL procedure successfully completed.
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for firstno: 40
+Enter value for secondno: 2
+less then 100
+
+PL/SQL procedure successfully completed.
+
+
+
+

@@ -1,0 +1,786 @@
+1. Create a table SCHOOL which has the following structure:-
+
+
+Roll _no Number 4
+Name Varchar2 20
+Section Number 4
+Class Character 7
+Oracle Number 3
+Dev_2000 Number 3
+
+ Fill in the following sample data:-
+
+Roll no. Name Section Class Oracle Dev_2000
+
+1 Mukesh Khanna 9012 Working 55 80
+2 Rajiv Chawala 9025 Student 75 85
+3 Pramila Bordes 9025 Working 45 45
+4 Nitish Bharadwaj 9025 Working 67 75
+5 Anita Sood 9012 Student 86 72
+6 Kalyani Deshmukh 9012 Working 55 65
+7 Rakesh Surana 9025 Working 95 95
+8 Alok Kumar Nath 9025 Working 25 40
+9 Sushmita Bannerjee 9025 Student 73 83
+10 Pranay Aiyyer 9012 Student 62 85
+11 Shalini Patel 9012 Student 35 00
+12 Ketan Tendulkar 9012 Working 83 98
+13 Arun Trivedi 9012 Working 67 53
+14 Victor D?souza 9025 Working 59 63
+15 Sarah Ahmed 9025 Student 65 73
+
+ Create another table with the following structure:-
+
+Roll_no Number 4
+Total Number 3
+Percent Number 5,2
+Grade Varchar2 10
+
+Insert into this table the total marks, percentage and grades of the respective students. The rules for
+grades are as follows:-
+
+For working persons
+
+Percentage Grade
+
+< 50 % FAIL
+>= 50 % PASS
+
+For students
+
+Percentage Grade
+
+< 40% FAIL
+40 - 49.99% C
+50 ? 59.99% B
+60 ? 79.99% A
+>= 80% HONOURS
+
+
+
+
+----->
+
+
+CREATE TABLE SCHOOL ( Roll_no Number(4), Name Varchar2(20), Section Number(4), CLASS Character(7), Oracle Number(3), Dev_2000 Number(3) );
+
+SQL> INSERT ALL INTO school
+  2  VALUES(1,
+  3         'Mukesh Khanna',
+  4         9012,
+  5         'Working',
+  6         55,
+  7         80) INTO school
+  8  VALUES(2,
+  9         'Rajiv Chawala',
+ 10         9025,
+ 11         'Student',
+ 12         75,
+ 13         85) INTO school
+ 14  VALUES(3,
+ 15         'Pramila Bordes',
+ 16         9025,
+ 17         'Working',
+ 18         45,
+ 19         45) INTO school
+ 20  VALUES(4,
+ 21         'Nitish Bharadwaj',
+ 22         9025,
+ 23         'Working',
+ 24         67,
+ 25         75) INTO school
+ 26  VALUES(5,
+ 27         'Anita Sood',
+ 28         9012,
+ 29         'Student',
+ 30         86,
+ 31         72) INTO school
+ 32  VALUES(6,
+ 33         'Kalyani Deshmukh',
+ 34         9012,
+ 35         'Working',
+ 36         55,
+ 37         65) INTO school
+ 38  VALUES(7,
+ 39         'Rakesh Surana',
+ 40         9025,
+ 41         'Working',
+ 42         95,
+ 43         95) INTO school
+ 44  VALUES(8,
+ 45         'Alok Kumar Nath',
+ 46         9025,
+ 47         'Working',
+ 48         25,
+ 49         40) INTO school
+ 50  VALUES(9,
+ 51         'Sushmita Bannerjee',
+ 52         9025,
+ 53         'Student',
+ 54         73,
+ 55         83) INTO school
+ 56  VALUES(10,
+ 57         'Pranay Aiyyer',
+ 58         9012,
+ 59         'Student',
+ 60         62,
+ 61         85) INTO school
+ 62  VALUES(11,
+ 63         'Shalini Patel',
+ 64         9012,
+ 65         'Student',
+ 66         35,
+ 67         00) INTO school
+ 68  VALUES(12,
+ 69         'Ketan Tendulkar',
+ 70         9012,
+ 71         'Working',
+ 72         83,
+ 73         98) INTO school
+ 74  VALUES(13,
+ 75         'Arun Trivedi',
+ 76         9012,
+ 77         'Working',
+ 78         67,
+ 79         53) INTO school
+ 80  VALUES(14,
+ 81         'Victor DÆsouza',
+ 82         9025,
+ 83         'Working',
+ 84         59,
+ 85         63) INTO school
+ 86  VALUES(15,
+ 87         'Sarah Ahmed',
+ 88         9025,
+ 89         'Student',
+ 90         65,
+ 91         73)
+ 92  SELECT *
+ 93  FROM dual ;
+
+15 rows created.
+
+SQL> CREATE TABLE oracle_result ( Roll_no Number (4), Total Number (3), Percent Number (5,2), Grade Varchar2 (10) );
+
+Table created.
+
+SQL> CREATE TABLE Dev_2000_result ( Roll_no Number (4), Total Number (3), Percent Number (5,2), Grade Varchar2 (10) );
+
+Table created.
+
+SQL> select * from school;
+
+   ROLL_NO NAME                    SECTION CLASS       ORACLE   DEV_2000
+---------- -------------------- ---------- ------- ---------- ----------
+         1 Mukesh Khanna              9012 Working         55         80
+         2 Rajiv Chawala              9025 Student         75         85
+         3 Pramila Bordes             9025 Working         45         45
+         4 Nitish Bharadwaj           9025 Working         67         75
+         5 Anita Sood                 9012 Student         86         72
+         6 Kalyani Deshmukh           9012 Working         55         65
+         7 Rakesh Surana              9025 Working         95         95
+         8 Alok Kumar Nath            9025 Working         25         40
+         9 Sushmita Bannerjee         9025 Student         73         83
+        10 Pranay Aiyyer              9012 Student         62         85
+        11 Shalini Patel              9012 Student         35          0
+
+   ROLL_NO NAME                    SECTION CLASS       ORACLE   DEV_2000
+---------- -------------------- ---------- ------- ---------- ----------
+        12 Ketan Tendulkar            9012 Working         83         98
+        13 Arun Trivedi               9012 Working         67         53
+        14 Victor DÆsouza             9025 Working         59         63
+        15 Sarah Ahmed                9025 Student         65         73
+
+15 rows selected.
+
+
+SQL> select * from oracle_result;
+
+   ROLL_NO      TOTAL    PERCENT GRADE
+---------- ---------- ---------- ----------
+         1         55         55 PASS
+         2         75         75 A
+         3         45         45 FAIL
+         4         67         67 PASS
+         5         86         86 HONOURS
+         6         55         55 PASS
+         7         95         95 PASS
+         8         25         25 FAIL
+         9         73         73 A
+        10         62         62 A
+        11         35         35 B
+
+   ROLL_NO      TOTAL    PERCENT GRADE
+---------- ---------- ---------- ----------
+        12         83         83 PASS
+        13         67         67 PASS
+        14         59         59 PASS
+        15         65         65 A
+         1         55         55 PASS
+         2         75         75 A
+         3         45         45 FAIL
+         4         67         67 PASS
+         5         86         86 HONOURS
+         6         55         55 PASS
+         7         95         95 PASS
+
+   ROLL_NO      TOTAL    PERCENT GRADE
+---------- ---------- ---------- ----------
+         8         25         25 FAIL
+         9         73         73 A
+        10         62         62 A
+        11         35         35 B
+        12         83         83 PASS
+        13         67         67 PASS
+        14         59         59 PASS
+        15         65         65 A
+
+30 rows selected.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2)
+
+
+declare
+	cursor c1 is select *from customer;
+	u number(5);
+	r number(6,2);
+	a number(6,2);
+	s number(6,2);
+	e number(6,2);
+	n number(6,2);
+begin
+
+	for x in c1
+	loop
+		u:=trunc(x.curr_reading-x.prev_reading);
+		
+		if(x.customer_type='a')
+		then
+		r:=1;
+		elsif(x.customer_type='i')
+		then
+		r:=1.25;
+		elsif(x.customer_type='c')
+		then
+		r:=1.50;
+		else
+		r:=1.30;
+		end if;
+		
+		a:=trunc(r*u);
+
+		if(x.meter_type='s')
+		then
+		s:=trunc((5/100)*a);
+		else
+		s:=trunc((10/100)*a);
+		end if;
+
+		e:=trunc((30/100)*(a+s));
+		n:=trunc(a+s+e);
+
+		insert into bill1 values(x.meter_no,u,r,a,s,e,n);
+		insert into bill2 values(a,s,e,n);
+	end loop;
+end;
+/
+
+/*
+
+ create table customer(meter_no varchar2(4),meter_type char(1),prev_reading number(5),curr_reading number(5),customer_type char(1),last_bill_payment char(1));
+
+Table created.
+
+SQL> describe customer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ METER_NO                                           VARCHAR2(4)
+ METER_TYPE                                         CHAR(1)
+ PREV_READING                                       NUMBER(5)
+ CURR_READING                                       NUMBER(5)
+ CUSTOMER_TYPE                                      CHAR(1)
+ LAST_BILL_PAYMENT                                  CHAR(1)
+
+SQL> create table bill1(meter_no varchar2(4),unit_used number(5),rate number(6,2),amount number(6,2),surcharge number(6,2),excise number(6,2),net number(6,2));
+
+Table created.
+
+SQL> create table bill2(amount number(6,2),surcharge number(6,2),excise number(6,2),net number(6,2));
+
+Table created.
+
+SQL> insert into customer values('T101','t',250,300,'a','y');
+
+1 row created.
+
+SQL> insert into customer values('T102','t',230,310,'i','y');
+
+1 row created.
+
+SQL> insert into customer values('T103','t',235,350,'c','n');
+
+1 row created.
+
+SQL> insert into customer values('T104','s',100,200,'r','n');
+
+1 row created.
+
+SQL> insert into customer values('T105','s',300,400,'a','y');
+
+1 row created.
+
+SQL> insert into customer values('T106','t',350,400,'i','y');
+
+1 row created.
+
+SQL> insert into customer values('T107','t',400,450,'c','n');
+
+1 row created.
+
+SQL> insert into customer values('T108','s',390,430,'c','n');
+
+1 row created.
+
+SQL> insert into customer values('T109','s',370,450,'r','y');
+
+1 row created.
+
+SQL> insert into customer values('T110','t',360,460,'a','y');
+
+1 row created.
+
+SQL> insert into customer values('T111','t',410,450,'i','n');
+
+1 row created.
+
+SQL> insert into customer values('T112','s',390,440,'c','n');
+
+1 row created.
+
+SQL> insert into customer values('T113','t',410,460,'r','y');
+
+1 row created.
+
+SQL> insert into customer values('T114','r',280,360,'i','y');
+
+1 row created.
+
+SQL> insert into customer values('T114','t',380,460,'a','y');
+
+1 row created.
+
+SQL> delete from customer where meter_no='T114' and meter_type='r';
+
+1 row deleted.
+
+SQL> select *from customer;
+
+METE M PREV_READING CURR_READING C L
+---- - ------------ ------------ - -
+T101 t          250          300 a y
+T102 t          230          310 i y
+T103 t          235          350 c n
+T104 s          100          200 r n
+T105 s          300          400 a y
+T106 t          350          400 i y
+T107 t          400          450 c n
+T108 s          390          430 c n
+T109 s          370          450 r y
+T110 t          360          460 a y
+T111 t          410          450 i n
+
+METE M PREV_READING CURR_READING C L
+---- - ------------ ------------ - -
+T112 s          390          440 c n
+T113 t          410          460 r y
+T114 t          380          460 a y
+
+14 rows selected.
+
+SQL> describe bill1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ METER_NO                                           VARCHAR2(4)
+ UNIT_USED                                          NUMBER(5)
+ RATE                                               NUMBER(6,2)
+ AMOUNT                                             NUMBER(6,2)
+ SURCHARGE                                          NUMBER(6,2)
+ EXCISE                                             NUMBER(6,2)
+ NET                                                NUMBER(6,2)
+
+SQL> describe bill2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ AMOUNT                                             NUMBER(6,2)
+ SURCHARGE                                          NUMBER(6,2)
+ EXCISE                                             NUMBER(6,2)
+ NET                                                NUMBER(6,2)
+
+SQL> describe customer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ METER_NO                                           VARCHAR2(4)
+ METER_TYPE                                         CHAR(1)
+ PREV_READING                                       NUMBER(5)
+ CURR_READING                                       NUMBER(5)
+ CUSTOMER_TYPE                                      CHAR(1)
+ LAST_BILL_PAYMENT                                  CHAR(1)
+
+SQL> @ F:\PLSQL\e2.sql
+
+PL/SQL procedure successfully completed.
+
+SQL> select *from bill1;
+
+METE  UNIT_USED       RATE     AMOUNT  SURCHARGE     EXCISE        NET
+---- ---------- ---------- ---------- ---------- ---------- ----------
+T101         50          1         50          5         16         71
+T102         80       1.25        100         10         33        143
+T103        115        1.5        172         17         56        245
+T104        100        1.3        130          6         40        176
+T105        100          1        100          5         31        136
+T106         50       1.25         62          6         20         88
+T107         50        1.5         75          7         24        106
+T108         40        1.5         60          3         18         81
+T109         80        1.3        104          5         32        141
+T110        100          1        100         10         33        143
+T111         40       1.25         50          5         16         71
+
+METE  UNIT_USED       RATE     AMOUNT  SURCHARGE     EXCISE        NET
+---- ---------- ---------- ---------- ---------- ---------- ----------
+T112         50        1.5         75          3         23        101
+T113         50        1.3         65          6         21         92
+T114         80          1         80          8         26        114
+
+14 rows selected.
+
+SQL> select *from bill2;
+
+    AMOUNT  SURCHARGE     EXCISE        NET
+---------- ---------- ---------- ----------
+        50          5         16         71
+       100         10         33        143
+       172         17         56        245
+       130          6         40        176
+       100          5         31        136
+        62          6         20         88
+        75          7         24        106
+        60          3         18         81
+       104          5         32        141
+       100         10         33        143
+        50          5         16         71
+
+    AMOUNT  SURCHARGE     EXCISE        NET
+---------- ---------- ---------- ----------
+        75          3         23        101
+        65          6         21         92
+        80          8         26        114
+
+14 rows selected.
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+3)
+
+
+
+declare
+	cursor c1 is select *from invoice;
+	ct number(6);
+	pt0 number(6):=0;
+	pt1 number(6):=0;
+	pt2 number(6):=0;
+	pt3 number(6):=0;
+	pt4 number(6):=0;
+	
+begin
+	for x in c1
+	loop
+	
+	if (x.product_code=0)
+	then
+	ct:=trunc(15*x.quantity_sold);
+	pt0:=trunc(pt0+(15*x.quantity_sold));
+
+
+	elsif (x.product_code=1)
+	then
+	ct:=trunc(35*x.quantity_sold);
+	pt1:=trunc(pt1+(35*x.quantity_sold));
+
+
+	elsif (x.product_code=2)
+	then
+	ct:=trunc(42*x.quantity_sold);
+	pt2:=trunc(pt2+(42*x.quantity_sold));
+
+
+	elsif (x.product_code=3)
+	then
+	ct:=trunc(51*x.quantity_sold);
+	pt3:=trunc(pt3+(51*x.quantity_sold));
+
+	else
+	ct:=trunc(60*x.quantity_sold);
+	pt4:=trunc(pt4+(60*x.quantity_sold));
+
+	end if;
+
+	insert into customer_purchase values(x.invoice_no,x.customer_code,ct);
+	
+	end loop;
+
+	insert into product_sale values(0,pt0);
+	insert into product_sale values(1,pt1);
+	insert into product_sale values(2,pt2);
+	insert into product_sale values(3,pt3);
+	insert into product_sale values(4,pt4);
+end;
+/
+
+
+
+
+SQL> create table invoice(invoice_no varchar2(4),invoice_date date,customer_code number(1),product_code number(1),quantity_sold number(3));
+
+Table created.
+
+
+
+
+SQL> insert into invoice values('I100','01-jan-2020',0,0,4);
+
+1 row created.
+
+SQL> insert into invoice values('I101','01-jun-2020',1,1,3);
+
+1 row created.
+
+SQL> insert into invoice values('I102','11-jun-2020',2,2,5);
+
+1 row created.
+
+SQL> insert into invoice values('I103','21-jun-2020',3,3,2);
+
+1 row created.
+
+SQL> insert into invoice values('I104','21-feb-2020',4,4,5);
+
+1 row created.
+
+SQL> insert into invoice values('I105','25-feb-2020',5,0,3);
+
+1 row created.
+
+SQL> insert into invoice values('I106','15-feb-2020',6,1,2);
+
+1 row created.
+
+SQL> insert into invoice values('I107','11-feb-2020',7,2,4);
+
+1 row created.
+
+SQL> insert into invoice values('I108','10-feb-2020',8,3,5);
+
+1 row created.
+
+SQL> insert into invoice values('I109','13-feb-2020',9,4,3);
+
+1 row created.
+
+
+
+SQL> select *from invoice;
+
+INVO INVOICE_D CUSTOMER_CODE PRODUCT_CODE QUANTITY_SOLD
+---- --------- ------------- ------------ -------------
+I100 01-JAN-20             0            0             4
+I101 01-JUN-20             1            1             3
+I102 11-JUN-20             2            2             5
+I103 21-JUN-20             3            3             2
+I104 21-FEB-20             4            4             5
+I105 25-FEB-20             5            0             3
+I106 15-FEB-20             6            1             2
+I107 11-FEB-20             7            2             4
+I108 10-FEB-20             8            3             5
+I109 13-FEB-20             9            4             3
+
+10 rows selected.
+
+SQL> create table customer_purchase(invoice_no varchar2(4),customer_code number(1),total number(6));
+
+Table created.
+
+SQL> create table product_sale(invoice_no varchar2(4),product_code number(1),total number(6));
+
+Table created.
+
+SQL> drop table product_sale;
+
+Table dropped.
+
+SQL> create table product_sale(product_code number(1),total number(6));
+
+Table created.
+
+
+SQL> @ F:\PLSQL\e3.sql
+
+PL/SQL procedure successfully completed.
+
+SQL> select *from customer_purchase;
+
+INVO CUSTOMER_CODE      TOTAL
+---- ------------- ----------
+I100             0         60
+I101             1        105
+I102             2        210
+I103             3        102
+I104             4        300
+I105             5         45
+I106             6         70
+I107             7        168
+I108             8        255
+I109             9        180
+
+10 rows selected.
+
+SQL> select *from product_sale;
+
+PRODUCT_CODE      TOTAL
+------------ ----------
+           0        105
+           1        175
+           2        378
+           3        357
+           4        480
+
+SQL>
+*/
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4)
+
+
+declare
+	cursor c1 is select *from employee;
+	da number(7,2);
+	hra number(7,2);
+	gr number(7,2);
+	
+begin
+	for x in c1
+	loop
+	
+	da:=trunc((35/100)*x.basic_salary);
+	
+	hra:=trunc((15/100)*x.basic_salary);
+	if(x.category='w' and hra>250)
+	then
+	hra:=250;
+
+	elsif(x.category='j' and hra>1000)
+	then
+	hra:=1000;
+
+	elsif(x.category='s' and hra>30000)
+	then
+	hra:=30000;
+
+	end if;
+
+	gr:=trunc(x.basic_salary+da+hra);
+	
+	insert into emp_info values(x.emp_no,gr);
+	
+	end loop;
+end;
+/
+
+
+/*
+
+SQL> create table employee(emp_no varchar2(4),ename varchar2(30),designation varchar2(10),category char(1),basic_salary number(4));
+
+Table created.
+
+
+
+SQL> insert into employee values('E100','william','mr','j',8000);
+
+1 row created.
+
+SQL> insert into employee values('E101','king','hr','s',9000);
+
+1 row created.
+
+SQL> insert into employee values('E102','scott','pr','w',9000);
+
+1 row created.
+
+SQL> insert into employee values('E103','james','mr','j',8000);
+
+1 row created.
+
+SQL> insert into employee values('E104','nicks','st','w',8000);
+
+1 row created.
+
+SQL> create table emp_info(ename varchar2(30),gross number(7,2));
+
+Table created.
+
+SQL> @ C:\Users\Madhuri_\Desktop\plsql\exercise5\e4.sql
+        if(x.catagory='w' and hra>250)
+             *
+ERROR at line 14:
+ORA-06550: line 14, column 7:
+PLS-00302: component 'CATAGORY' must be declared
+ORA-06550: line 14, column 2:
+PL/SQL: Statement ignored
+
+
+SQL> @ F:\PLSQL\e4.sql
+
+PL/SQL procedure successfully completed.
+
+SQL> select *from employee;
+
+EMP_ ENAME                          DESIGNATIO C BASIC_SALARY
+---- ------------------------------ ---------- - ------------
+E100 william                       mr         j         8000
+E101 king                           hr         s         9000
+E102 scott                          pr         w         9000
+E103 james                          mr         j         8000
+E104 nicks                          st         w         8000
+
+SQL> select *from emp_info;
+
+ENAME                               GROSS
+------------------------------ ----------
+E100                                11800
+E101                                13500
+E102                                12400
+E103                                11800
+E104                                11050
+
+SQL>
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+

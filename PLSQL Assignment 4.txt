@@ -1,0 +1,291 @@
+1. Write a program containing a loop that iterates from 1 to 1000 using a variable I, which is
+incremented each time around the loop. The program should output the value of I every hundred
+iterations (i.e., the output should be 100, 200, etc). Display the output on the screen using
+dbms_output.put_line.
+
+
+Declare
+             i int:=1;
+
+Begin 
+             Loop
+                   dbms_output.put_line(i);
+                   dbms_output.put_line('____');
+                   exit WHEN i>1000;
+                    i:=i+100;
+            End Loop;
+End;
+/
+
+o/p:
+
+SQL> @ F:\PLSQL\p3.sql
+1
+____
+101
+____
+201
+____
+301
+____
+401
+____
+501
+____
+601
+____
+701
+____
+801
+____
+901
+____
+1001
+____
+
+PL/SQL procedure successfully completed.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2. Write a program that examines all the numbers from 1 to 999, displaying all those
+for which the sum of the cubes of the digits equal the number itself. Display the
+output on the screen using dbms_output.put_line.
+
+
+Declare
+               num number(4);
+               rem number(4);
+               s number(6);
+Begin
+              for x in 1..999
+            loop 
+              num:=x;
+              s :=0;
+              while num !=0
+              loop
+              rem:=mod(num,10);
+              s := s+(rem*rem*rem);
+              num := trunc(num/10);
+            end loop;
+               if x=s
+                then 
+               dbms_output.put_line(x);
+               end if;
+               end loop;
+End;
+/
+             
+SQL> @ F:\PLSQL\p3.sql
+1
+153
+370
+371
+407
+
+PL/SQL procedure successfully completed.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3. Write a PL*SQL block that reads in a minimum and maximum value for a radius,
+along with an increment factor, and generates a series of radii by repeatedly
+adding the increment to the minimum until the maximum is reached. For each
+value of the radius, compute and display the circumference, area, and volume of
+the sphere. (Be sure to include both the maximum and the minimum values.).
+Validate each of the input values to be sure they are positive. If the minimum is
+typed in place of the maximum, swap the values within the program, and continue
+execution. Display the results on the screen using dbms_output.put_line.
+
+
+Declare
+             low number(4);
+             high number(4);
+             incr number(4);
+             a number(8,2);
+             c number(8,2);
+             v number(8,2);
+             temp number(4):=0;
+
+Begin
+             low := &low;
+             high :=&high;
+             incr := &incr;
+             if low>0 and high>0 and incr>0
+             then
+             if low > high
+             then
+             temp := low;
+             low := high;
+             high := temp;
+             end if;
+
+             while low<=high
+             loop
+                     a:=3.14*(low*low);
+                     c:=2*3.14*low;
+                     v:=4/3*3.14*low*low*low;
+                    dbms_output.put_line('Area of circle where radius is '|| low||' = '||a);
+                    dbms_output.put_line('Circumference of circle where radius is '|| low||' = '||c);
+                    dbms_output.put_line('Volume of circle where radius is '|| low||' = '||v);
+                    low:=trunc(low+incr);
+             end loop;
+                  else
+                         dbms_output.put_line('Enter positive integer');
+                  end if;
+End;
+/
+      
+o/p:
+SQL> @ F:\PLSQL\p3.sql
+Enter value for low: 3
+Enter value for high: 5
+Enter value for incr: 1
+Area of circle where radius is 3 = 28.26
+Circumference of circle where radius is 3 = 18.84
+Volume of circle where radius is 3 = 113.04
+Area of circle where radius is 4 = 50.24
+Circumference of circle where radius is 4 = 25.12
+Volume of circle where radius is 4 = 267.95
+Area of circle where radius is 5 = 78.5
+Circumference of circle where radius is 5 = 31.4
+Volume of circle where radius is 5 = 523.33
+
+PL/SQL procedure successfully completed.
+
+----------------------------------------------------------------------------------------------
+5. A palindrome is a word that is spelled the same forward and backward, such as
+level, radar, etc. Write a program to read in a five letter word from the user and
+determine whether it is a palindrome. Display the results on the screen using
+dbms_output.put_line.
+
+Declare
+               num int:='&number';
+               counter int:=0;
+
+Begin
+              Loop 
+                             counter:=counter+1;
+                             num:=2*num;
+                         exit WHEN num>1000000;
+             End Loop;
+            dbms_output.put_line('number'||num||' needs '||counter||' times multiplication to reach till 1 million');
+End;
+/
+
+o/p:
+
+SQL> @F:\PLSQL\p3.sql
+Enter value for number: 34000
+number1088000 needs 5 times multiplication to reach till 1 million
+
+PL/SQL procedure successfully completed.
+
+----------------------------------------------------------------------------------------------
+5. A palindrome is a word that is spelled the same forward and backward, such as
+level, radar, etc. Write a program to read in a five letter word from the user and
+determine whether it is a palindrome. Display the results on the screen using
+dbms_output.put_line.
+
+Declare
+                 str varchar2(50):='&string';
+                 counter int:=length(str);
+Begin
+                  dbms_output.put_line(counter);
+                  Loop 
+                         exit 
+                             WHEN counter=0;
+                         exit
+                             WHEN not(substr(str,counter,1)=substr(str,((length(str)+1)-counter),1));
+                        counter:=counter-1;
+                 End Loop;
+                 if counter=0
+                 then 
+                    dbms_output.put_line(str ||'   Palindrome');
+                 else
+                    dbms_output.put_line(str ||'   Not palindrome');
+                End if;
+End;
+/
+
+o/p:
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for string: radar
+5
+radar   Palindrome
+
+PL/SQL procedure successfully completed.
+
+---------------------------------------------------------------------------------------------
+
+6. Modify the above program to accept a variable length word. This requires
+determining how many characters are read in.
+
+
+Declare
+                 str varchar2(50):='&string';
+                 counter int:=length(str);
+Begin
+                  dbms_output.put_line(counter);
+                  Loop 
+                         exit 
+                             WHEN counter=0;
+                         exit
+                             WHEN not(substr(str,counter,1)=substr(str,((length(str)+1)-counter),1));
+                        counter:=counter-1;
+                 End Loop;
+                 if counter=0
+                 then 
+                    dbms_output.put_line(str ||'   Palindrome');
+                 else
+                    dbms_output.put_line(str ||'   Not palindrome');
+                End if;
+End;
+/
+
+
+o/p:
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for string: radar
+5
+radar   Palindrome
+
+PL/SQL procedure successfully completed.
+
+----------------------------------------------------------------------------------------------
+
+6. Write a program to read in a number and print it out digit by digit, as a series of words. For example, the
+number 523 would be printed as "five two three". Use decode function within a for loop. Display the
+results on the screen using dbms_output.put_line.
+
+
+Declare
+              num varchar(10):='&number';
+               i varchar(1);
+               c int:=length(num);
+              Result varchar(10);
+
+Begin 
+            dbms_output.put_line('Entered no. is');
+            Loop
+                    i:=substr(num,1,1);
+                    num:=substr(num,2);
+               Select decode(i, 1, 'one', 2, 'two', 3, 'three', 4, 'four', 5, 'five', 6, 'six', 7, 'seven', 8, 'eight',9,'nine','zero') into Result
+From dual;
+                    dbms_output.put_line(RESULT);
+                    exit when c=1;
+                    c:=c-1;
+           End Loop;
+End;
+/
+
+
+o/p:
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for number: 523
+Entered no. is
+five
+two
+three
+
+PL/SQL procedure successfully completed.
+
+
+            

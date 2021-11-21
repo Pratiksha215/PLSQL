@@ -1,0 +1,30 @@
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  num number(10);
+  3  low number(10);
+  4  high number(10);
+  5  begin
+  6  num:=&num;
+  7  high:=&high;
+  8  low:=&low;
+  9  IF num >= low and num <= high THEN
+ 10  dbms_output.put_line('num is within range');
+ 11  else
+ 12  dbms_output.put_line('num is not in range');
+ 13  end if;
+ 14* end;
+SQL> /
+Enter value for num: 50
+old   6: num:=&num;
+new   6: num:=50;
+Enter value for high: 100
+old   7: high:=&high;
+new   7: high:=100;
+Enter value for low: 10
+old   8: low:=&low;
+new   8: low:=10;
+num is within range
+
+PL/SQL procedure successfully completed.

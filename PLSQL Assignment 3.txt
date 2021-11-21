@@ -1,0 +1,345 @@
+1. Input a number and determine whether it is within a given range (for example, between
+1 and 10). The low and high values of the range may be input by the user rather than
+be fixed by the program. Display the output on the screen using
+dbms_output.put_line.
+
+SQL> @F:\PLSQL\p3.sql
+Enter value for num: 9
+Enter value for lower: 2
+Enter value for upper: 12
+number is in range
+
+PL/SQL procedure successfully completed.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+2. Input three positive integers representing the sides of a triangle, and determine whetherthey form a valid triangle. Hint: In a triangle, the sum of any two sides must alwaysbe greater than the third side.Display the output on the screen usingdbms_output.put_line.
+
+
+Declare
+             side1 number := &side1;
+             side2 number := &side2;
+             side3 number := &side3;
+Begin
+           if(side1 + side2 > side3   and    side2 + side3 > side1  and side1 + side3 > side2)
+           then
+               dbms_output.put_line('This is a triangle');
+           else
+               dbms_output.put_line('This is not a Triangle');
+          end if;
+End;
+/
+
+SQL> @F:\PLSQL\p3.sql
+Enter value for side1: 1
+Enter value for side2: 2
+Enter value for side3: 10
+This is not a Triangle
+
+PL/SQL procedure successfully completed.
+
+SQL> @F:\PLSQL\p3.sql
+Enter value for side1: 3
+Enter value for side2: 4
+Enter value for side3: 5
+This is a triangle
+
+PL/SQL procedure successfully completed.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. Check if a given a year is a leap year. The condition is:-
+year should be (divisible by 4 and not divisible by 100) or (divisible by 4 and
+divisible by 400.) Display the output on the screen using dbms_output.put_line. The
+year should be input by the user.
+
+Declare
+           year number := &year; 
+Begin
+            if MOD(year, 4)=0 AND 
+               MOD(year, 100)!=0 OR 
+               MOD(year, 400)=0 
+           Then
+               dbms_output.Put_line(year  || ' is a leap year '); 
+            else
+               dbms_output.Put_line(year || ' is not a leap year.'); 
+          End if; 
+End;  
+/
+
+
+
+SQL> ed F:\PLSQL\p3.sql
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for year: 2000
+2000 is a leap year
+
+PL/SQL procedure successfully completed.
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for year: 2014
+2014 is not a leap year.
+
+PL/SQL procedure successfully completed.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4. Ask the user to enter the weight of an apple box. If the
+
+weight is >= 10 kg, rate =Rs. 5/kg
+
+weight is < 10 kg, rate = Rs. 7/kg
+
+Calculate the cost of the apple box. Display the output on the screen using dbms_output.put_line.
+
+
+Declare
+              weight number:=&apple_weight;
+              rate number;
+
+Begin
+             if (weight>=10)
+                then rate := 5;
+            else 
+                rate:=7;
+            end if;
+           dbms_output.put_line('Total weight'||weight||'Total cost'||            (weight*rate));
+End;
+ /
+
+
+o/p:
+SQL> @ F:\PLSQL\p3.sql
+Enter value for apple_weight: 12
+Total weight12Total cost60
+
+PL/SQL procedure successfully completed.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5. Program should accept the age of the user. Depending upon the following conditions it should output:-
+
+age <18 years, ?child?
+age >= 18 years and <21 years, ?major?
+age>= 21years ?adult?
+
+ Display the output on the screen using dbms_output.put_line.
+
+Declare
+             age number:=&user_age;
+             user varchar(20);
+
+Begin
+             if (age<18)
+                  then user :='child';
+            elsif (age>18) AND (age<21) 
+                  then user :='major';
+            else user:='adult';
+            end if;
+           dbms_output.put_line('user is '||USER);
+End;
+/
+
+o/p:
+SQL> @ F:\PLSQL\p3.sql
+Enter value for user_age: 12
+user is child
+
+PL/SQL procedure successfully completed.
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for user_age: 23
+user is adult
+
+PL/SQL procedure successfully completed.
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for user_age: 19
+user is major
+
+PL/SQL procedure successfully completed.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6. Write a program that asks the user to input two character strings. Your program should
+then determine if one character string exists inside another character string. Display
+the above on the screen using dbms_output.put_line.
+
+Declare
+            string varchar2(50);
+            substring varchar(30);
+            i number(2);
+Begin
+          string := &string;
+          substring := &substring;
+          i := instr(string, substring);
+          dbms_output.put_line(i);
+          if(i=0)
+          then
+          dbms_output.put_line('substring does not exist');
+          else
+          dbms_output.put_line('substring  exist');
+          end if;
+End;
+/
+          
+o/p:
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for string: 'pratiksha'
+Enter value for substring: 'tiksha'
+4
+substring  exist
+
+PL/SQL procedure successfully completed.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7. Suppose the grade obtained by a student depends upon his scores and the grading rule is as follows. :-
+
+Scores Grades
+ 95-100 A
+ 85-94 B
+ 70-84 C
+ 60-69 D
+ 0-59 E
+
+Write a block to accept a student?s marks and accordingly output his grade. Display the output on the
+screen using dbms_output.put_line.
+
+
+Declare
+              score number:='&score';
+              grade varchar(1);
+
+Begin
+                if score<=59 then grade:='E';
+               elsif score<=69 then grade:='D';
+               elsif score<=84 then grade:='C';
+               elsif score<=94 then grade:='B';
+               elsif score<=100 then grade:='A';
+               End if;
+
+               dbms_output.put_line('your marks are'||score||' your grade is --->'||grade);
+End;
+/     
+
+o/p:
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for score: 65
+your marks are65 your
+grade is --->D
+
+PL/SQL procedure successfully completed.
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for score: 100
+your marks are100 your
+grade is --->A
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+8. A company manufactures three products:- computer stationery, fixed disks and computers. The following
+codes are used to indicate them:-
+
+Product Code
+Computer Stationery 1
+Fixed Disks 2
+Computers 3
+
+The company has a discount policy as follows:-
+
+Product Order amount Discount rate
+Computer stationery Rs. 5000 or more 12%
+Computer stationery Rs. 3000 or more 8%
+Computer stationery Below Rs. 3000 2%
+Fixed disks Rs. 20000 or more 10%
+Fixed disks Rs. 15000 or more 5%
+Computers Rs. 50000 or more 10%
+Computers Rs. 25000 or more 5%
+
+Write a program to accept the order details i.e. product code and order amounts for the products, calculate
+the discount amounts as per this policy and output the net order amount. Display the output on the screen
+using dbms_output.put_line.
+
+--------------------------
+
+DECLARE code number:='&item_code';--if it is a procedure item_code will be permanently saved in user_source.
+
+ amt number:='&item_amount';
+
+ disc number;
+
+ prod varchar2(30);
+
+ BEGIN IF code=1 THEN prod:='Computer Stationary';
+
+ IF amt>=5000 THEN disc:=.12;
+
+ elsif amt>=3000 THEN disc:=.08;
+
+ ELSE disc:=.02;
+
+ END IF;
+
+ elsif code=2 THEN prod:='Fixed Disks';
+
+ IF amt>=20000 THEN disc:=.12;
+
+ elsif amt>=15000 THEN disc:=.08;
+
+ END IF;
+
+ elsif code=3 THEN prod:='Computers';
+
+ IF amt>=50000 THEN disc:=.12;
+
+ elsif amt>=25000 THEN disc:=.08;
+
+ END IF;
+
+ END IF;
+
+ dbms_output.put_line('__________________________________');
+
+ dbms_output.put_line('PRODUCT '||prod);
+
+ dbms_output.put_line('ORDER AMOUNT '||amt);
+
+ dbms_output.put_line('DISCOUNT IS '||disc);
+
+ dbms_output.put_line('AFTER DISCOUNT '||((1-disc)*amt));
+
+ dbms_output.put_line('__________________________________');
+
+ END;
+
+ /
+
+o/p:
+-------
+
+Enter value for item_code: 3
+Enter value for item_amount: 60000
+__________________________________
+PRODUCT Computers
+ORDER AMOUNT 60000
+DISCOUNT IS .12
+AFTER DISCOUNT 52800
+__________________________________
+
+PL/SQL procedure successfully completed.
+
+SQL> @ F:\PLSQL\p3.sql
+Enter value for item_code: 3
+Enter value for item_amount: 25000
+__________________________________
+PRODUCT Computers
+ORDER AMOUNT 25000
+DISCOUNT IS .08
+AFTER DISCOUNT 23000
+__________________________________
+
+PL/SQL procedure successfully completed.
+
+
